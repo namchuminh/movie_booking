@@ -39,6 +39,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Giá Trị Giảm</label>
+                            <input type="number" name="value" class="form-control" min="1" max="100" value="{{ old('value') }}" placeholder="Giá trị giảm">
+                            @error('value') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label>Mô Tả</label>
                             <textarea name="description" class="form-control" rows="4" placeholder="Nội dung mô tả">{{ old('description') }}</textarea>
                             @error('description') <span class="text-danger">{{ $message }}</span> @enderror

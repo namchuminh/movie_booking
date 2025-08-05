@@ -9,7 +9,7 @@ class Promotion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'start_date', 'end_date', 'image'];
+    protected $fillable = ['title', 'value', 'description', 'start_date', 'end_date', 'image'];
 
     public function tickets()
     {

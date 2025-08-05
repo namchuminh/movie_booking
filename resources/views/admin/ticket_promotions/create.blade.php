@@ -51,7 +51,7 @@
                                 <option value="">-- Chọn khuyến mãi --</option>
                                 @foreach($promotions as $promo)
                                     <option value="{{ $promo->id }}" {{ old('promo_id') == $promo->id ? 'selected' : '' }}>
-                                        {{ $promo->title }} ({{ \Carbon\Carbon::parse($promo->start_date)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($promo->end_date)->format('d/m/Y') }})
+                                        {{ $promo->title }} | {{ $promo->value }}% ({{ \Carbon\Carbon::parse($promo->start_date)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($promo->end_date)->format('d/m/Y') }})
                                     </option>
                                 @endforeach
                             </select>

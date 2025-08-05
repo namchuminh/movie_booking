@@ -47,7 +47,7 @@
                                 Rạp: {{ $item->showtime->room->cinema->name ?? 'N/A' }}<br>
                                 Phòng: {{ $item->showtime->room->name ?? 'N/A' }}<br>
                             </td>
-                            <td>{{ $item->promotion->title ?? 'N/A' }}</td>
+                            <td>{{ $item->promotion->title ?? 'N/A' }}<br>Giá trị giảm: {{ $item->promotion->value ?? 'N/A' }}%</td>
                             <td>{{ \Carbon\Carbon::parse($item->showtime->show_date)->format('d/m/Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->showtime->show_time)->format('H:i') }}</td>
                             <td>

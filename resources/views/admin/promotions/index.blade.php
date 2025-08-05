@@ -73,6 +73,7 @@
                         <th>#</th>
                         <th>Ảnh</th>
                         <th>Tiêu Đề</th>
+                        <th>Giá Trị Giảm</th>
                         <th>Ngày Áp Dụng</th>
                         <th>Ngày Kết Thúc</th>
                         <th>Hành Động</th>
@@ -90,6 +91,7 @@
                                 @endif
                             </td>
                             <td>{{ $promotion->title }}</td>
+                            <td>{{ $promotion->value }}%</td>
                             <td>
                                 {{ \Carbon\Carbon::parse($promotion->start_date)->format('d/m/Y') }}
                             </td>

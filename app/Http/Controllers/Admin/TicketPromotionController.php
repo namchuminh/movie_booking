@@ -24,7 +24,7 @@ class TicketPromotionController extends Controller
             'room.cinema:id,name'     // load quan hệ cinema từ room
         ])->select('id', 'movie_id', 'room_id', 'show_time')->get();
 
-        $promotions = Promotion::select('id', 'title', 'start_date', 'end_date')->get();
+        $promotions = Promotion::select('id', 'title', 'start_date', 'end_date', 'value')->get();
 
         return view('admin.ticket_promotions.create', compact('showtimes', 'promotions'));
     }
@@ -37,11 +37,10 @@ class TicketPromotionController extends Controller
         ]);
 
         $exists = TicketPromotion::where('showtime_id', $request->showtime_id)
-                                ->where('promo_id', $request->promo_id)
                                 ->exists();
 
         if ($exists) {
-            return redirect()->back()->withErrors(['msg' => 'Khuyến mãi này đã được áp dụng cho suất chiếu!'])->withInput();
+            return redirect()->back()->withErrors(['msg' => 'Suất chiếu này hiện đã áp dụng giảm giá rồi!'])->withInput();
         }
 
         TicketPromotion::create($request->only(['showtime_id', 'promo_id']));

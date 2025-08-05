@@ -43,6 +43,7 @@ class PromotionController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'value' => 'required|numeric|min:1|max:100',
         ], [
             'title.required' => 'Tiêu đề là bắt buộc.',
             'start_date.required' => 'Ngày bắt đầu là bắt buộc.',
@@ -51,10 +52,14 @@ class PromotionController extends Controller
             'image.image' => 'Tệp tải lên phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
             'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
-            'description.string' => 'Mô tả phải là chuỗi văn bản.'
+            'description.string' => 'Mô tả phải là chuỗi văn bản.',
+            'value.required' => 'Giá trị giảm là bắt buộc.',
+            'value.numeric' => 'Giá trị giảm phải là một số.',
+            'value.min' => 'Giá trị giảm phải lớn hơn hoặc bằng 1.',
+            'value.max' => 'Giá trị giảm phải nhỏ hơn hoặc bằng 100.',
         ]);
 
-        $data = $request->only(['title', 'description', 'start_date', 'end_date']);
+        $data = $request->only(['title', 'description', 'start_date', 'end_date', 'value']);
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/promotions', 'public');
@@ -86,6 +91,7 @@ class PromotionController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'value' => 'required|numeric|min:1|max:100',
         ],[
             'title.required' => 'Tiêu đề là bắt buộc.',
             'start_date.required' => 'Ngày bắt đầu là bắt buộc.',
@@ -94,11 +100,15 @@ class PromotionController extends Controller
             'image.image' => 'Tệp tải lên phải là hình ảnh.',
             'image.mimes' => 'Hình ảnh phải có định dạng: jpeg, png, jpg, gif.',
             'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
-            'description.string' => 'Mô tả phải là chuỗi văn bản.'
+            'description.string' => 'Mô tả phải là chuỗi văn bản.',
+            'value.required' => 'Giá trị giảm là bắt buộc.',
+            'value.numeric' => 'Giá trị giảm phải là một số.',
+            'value.min' => 'Giá trị giảm phải lớn hơn hoặc bằng 1.',
+            'value.max' => 'Giá trị giảm phải nhỏ hơn hoặc bằng 100.',
         ]);
 
         $promotion = Promotion::findOrFail($id);
-        $data = $request->only(['title', 'description', 'start_date', 'end_date']);
+        $data = $request->only(['title', 'description', 'start_date', 'end_date', 'value']);
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/promotions', 'public');
