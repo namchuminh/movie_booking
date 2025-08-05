@@ -62,171 +62,179 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="{{ route('admin.dashboard') }}" class="nav-link active">
+
+                        {{-- Trang Chủ --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.dashboard') }}"
+                            class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Trang Chủ
-                                </p>
+                                <p>Trang Chủ</p>
                             </a>
                         </li>
 
+                        {{-- Quản lý phim --}}
                         <li class="nav-header">QUẢN LÝ PHIM</li>
 
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview {{ request()->routeIs('admin.movies.*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('admin.movies.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-film"></i>
-                                <p>
-                                    Phim
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                                <p>Phim <i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.movies.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh Sách</p>
+                                    <a href="{{ route('admin.movies.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.movies.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Danh Sách</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.movies.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Mới</p>
+                                    <a href="{{ route('admin.movies.create') }}"
+                                    class="nav-link {{ request()->routeIs('admin.movies.create') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Thêm Mới</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        {{-- Rạp Chiếu & Phòng --}}
+                        <li class="nav-item has-treeview {{ request()->routeIs('admin.cinemas.*') || request()->routeIs('admin.rooms.*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('admin.cinemas.*') || request()->routeIs('admin.rooms.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-theater-masks"></i>
-                                <p>
-                                    Rạp Chiếu & Phòng
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                                <p>Rạp Chiếu & Phòng<i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.cinemas.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh Sách Rạp</p>
+                                    <a href="{{ route('admin.cinemas.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.cinemas.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Danh Sách Rạp</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.cinemas.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Rạp Mới</p>
+                                    <a href="{{ route('admin.cinemas.create') }}"
+                                    class="nav-link {{ request()->routeIs('admin.cinemas.create') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Thêm Rạp Mới</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.rooms.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh Sách Phòng</p>
+                                    <a href="{{ route('admin.rooms.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.rooms.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Danh Sách Phòng</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.rooms.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Phòng Mới</p>
+                                    <a href="{{ route('admin.rooms.create') }}"
+                                    class="nav-link {{ request()->routeIs('admin.rooms.create') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Thêm Phòng Mới</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
+                        {{-- Lịch chiếu --}}
                         <li class="nav-item">
-                            <a href="{{ route('admin.showtimes.index') }}" class="nav-link">
+                            <a href="{{ route('admin.showtimes.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.showtimes.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-clock"></i>
                                 <p>Lịch Chiếu</p>
                             </a>
                         </li>
 
+                        {{-- Ghế & Vé --}}
                         <li class="nav-header">QUẢN LÝ GHẾ & ĐẶT VÉ</li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.seats.index') }}" class="nav-link">
+                            <a href="{{ route('admin.seats.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.seats.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-chair"></i>
                                 <p>Ghế Ngồi</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.tickets.index') }}" class="nav-link">
+                            <a href="{{ route('admin.tickets.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.tickets.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-ticket-alt"></i>
                                 <p>Đặt Vé</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.ticket-codes.index') }}" class="nav-link">
+                            <a href="{{ route('admin.ticket-codes.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.ticket-codes.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-barcode"></i>
                                 <p>Mã Vé</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.booking-histories.index') }}" class="nav-link">
+                            <a href="{{ route('admin.booking-histories.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.booking-histories.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-history"></i>
                                 <p>Lịch Sử Đặt Vé</p>
                             </a>
                         </li>
 
+                        {{-- Khuyến mãi & người dùng --}}
                         <li class="nav-header">KHUYẾN MÃI & NGƯỜI DÙNG</li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.promotions.index') }}" class="nav-link">
+                            <a href="{{ route('admin.promotions.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.promotions.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-gift"></i>
                                 <p>Khuyến Mãi</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.ticket-promotions.index') }}" class="nav-link">
+                            <a href="{{ route('admin.ticket-promotions.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.ticket-promotions.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-tags"></i>
                                 <p>Vé Có KM</p>
                             </a>
                         </li>
 
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        {{-- Người dùng --}}
+                        <li class="nav-item has-treeview {{ request()->routeIs('admin.users.*') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-users-cog"></i>
-                                <p>
-                                    Quản Lý Người Dùng
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                                <p>Quản Lý Người Dùng<i class="right fas fa-angle-left"></i></p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.users.index') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh Sách</p>
+                                    <a href="{{ route('admin.users.index') }}"
+                                    class="nav-link {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Danh Sách</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.users.create') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm Mới</p>
+                                    <a href="{{ route('admin.users.create') }}"
+                                    class="nav-link {{ request()->routeIs('admin.users.create') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i><p>Thêm Mới</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
+                        {{-- Thông tin cá nhân --}}
                         <li class="nav-item">
-                            <a href="{{ route('admin.profiles.index') }}" class="nav-link">
+                            <a href="{{ route('admin.profiles.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.profiles.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user-edit"></i>
                                 <p>Đổi Thông Tin</p>
                             </a>
                         </li>
 
+                        {{-- Đăng xuất --}}
                         <li class="nav-item">
-                            <a href="{{ route('admin.logout') }}" class="nav-link">
+                            <a href="{{ route('admin.logout') }}"
+                            class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>Đăng Xuất</p>
                             </a>
                         </li>
-
-
                     </ul>
                 </nav>
+
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
