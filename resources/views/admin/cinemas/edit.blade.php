@@ -1,0 +1,76 @@
+@extends('admin.layouts.app')
+@section('title', 'Chỉnh Sửa Rạp Phim')
+
+@section('content')
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản Lý Rạp Phim</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Trang Chủ</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('admin.cinemas.index') }}">Rạp Phim</a></li>
+                    <li class="breadcrumb-item active">Chỉnh Sửa Rạp</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Chỉnh sửa thông tin rạp</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('admin.cinemas.update', $cinema->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="form-group">
+                            <label>Tên Rạp</label>
+                            <input type="text" name="name" class="form-control" value="{{ old('name', $cinema->name) }}" placeholder="Tên rạp">
+                            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Địa Chỉ</label>
+                            <input type="text" name="location" class="form-control" value="{{ old('location', $cinema->location) }}" placeholder="Địa chỉ chi tiết">
+                            @error('location') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Số Điện Thoại</label>
+                            <input type="text" name="phone" class="form-control" value="{{ old('phone', $cinema->phone) }}" placeholder="0123 456 789">
+                            @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ảnh Đại Diện</label><br>
+                            @if ($cinema->image)
+                                <img src="{{ asset($cinema->image) }}" alt="Ảnh hiện tại" width="150" height="150" class="mb-2">
+                            @endif
+                            <input type="file" name="image" class="form-control-file">
+                            @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="text-right">
+                            <a href="{{ route('admin.cinemas.index') }}" class="btn btn-secondary">Quay Lại</a>
+                            <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+</section>
+
+@endsection
