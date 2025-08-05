@@ -8,8 +8,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
+Route::post('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin_or_staff'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('movies', \App\Http\Controllers\Admin\MovieController::class);
@@ -24,5 +26,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('ticket-promotions', \App\Http\Controllers\Admin\TicketPromotionController::class);
 
     Route::get('/tickets/{id}/print', [\App\Http\Controllers\Admin\TicketController::class, 'print'])->name('tickets.print');
-
+    Route::get('/logout', [\App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
 });
