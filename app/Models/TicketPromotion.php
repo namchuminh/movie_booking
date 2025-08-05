@@ -11,17 +11,19 @@ class TicketPromotion extends Model
 
     protected $table = 'ticket_promotions';
 
-    public $incrementing = false; // Vì bảng có khóa chính là composite (ticket_id + promo_id)
+    public $incrementing = false;
 
-    protected $fillable = ['ticket_id', 'promo_id'];
+    protected $primaryKey = 'showtime_id';
 
-    public function ticket()
+    protected $fillable = ['showtime_id', 'promo_id'];
+
+    public function showtime()
     {
-        return $this->belongsTo(Ticket::class);
+        return $this->belongsTo(Showtime::class);
     }
 
     public function promotion()
     {
-        return $this->belongsTo(Promotion::class);
+        return $this->belongsTo(Promotion::class, 'promo_id');
     }
 }

@@ -211,7 +211,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('admin.profiles.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-edit"></i>
                                 <p>Đổi Thông Tin</p>
                             </a>

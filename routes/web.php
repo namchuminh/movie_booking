@@ -24,6 +24,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin_or_staff'])->
     Route::resource('promotions', \App\Http\Controllers\Admin\PromotionController::class);
     Route::resource('ticket-codes', \App\Http\Controllers\Admin\TicketCodeController::class);
     Route::resource('ticket-promotions', \App\Http\Controllers\Admin\TicketPromotionController::class);
+    Route::resource('profiles', \App\Http\Controllers\Admin\ProfileController::class);
 
     Route::get('/tickets/{id}/print', [\App\Http\Controllers\Admin\TicketController::class, 'print'])->name('tickets.print');
     Route::get('/logout', [\App\Http\Controllers\Admin\AuthController::class, 'logout'])->name('logout');
