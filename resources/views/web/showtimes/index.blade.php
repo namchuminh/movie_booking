@@ -1,40 +1,17 @@
 @extends('web.layouts.app')
-@section('title', 'Trang Chủ')
+@section('title', 'Lịch chiếu phim rạp')
 
 @section('content')
-    <div class="container-fluid bg-light py-4 border-bottom">
-        <div class="container">
-            <h5 class="text-center mb-4">Mua vé theo phim</h5>
 
-            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 justify-content-center">
-                @foreach ($movies->take(9) as $movie)
-                    <div class="col" style="max-width: 140px;">
-                        <div class="bg-white border rounded shadow-sm">
-                            <div class="position-relative">
-                                <a href="#" class="text-decoration-none border-none">
-                                    <img src="{{ asset($movie->image) }}" class="rounded w-100" style="height: 185px;">
-                                </a>
-                                <a href="#"
-                                    class="fw-bold position-absolute bottom-0 start-0 end-0 bg-danger text-white py-1 text-decoration-none text-center"
-                                    style="font-size: 12px;">Mua vé</a>
-                            </div>
-                            <div class="title-movie text-dark mt-2 fw-bold px-2">
-                                <a href="#" class="text-decoration-none text-dark">{{ $movie->title }}</a>
-                            </div>
-                            <div class="text-muted fw-bold mb-2 px-2" style="font-size: 12px;">
-                                {{ \Carbon\Carbon::parse($movie->release_date)->format('d/m') }}
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+    <div class="container-fluid mb-3">
+        <div class="movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
+            <h5 class="fw-bold mb-3 text-white">Lịch chiếu</h5>
+            <p class="mb-0">
+                Tìm lịch chiếu phim / rạp nhanh nhất với chỉ 1 bước!
+            </p>
         </div>
     </div>
-    
-    <!-- PHẦN 'MUA VÉ THEO RẠP' CHUẨN THEO GIAO DIỆN HÌNH ẢNH MỚI -->
-
     <div class="container my-4">
-        <h5 class="text-center mb-4">Mua vé theo rạp</h5>
         <div class="row">
             <!-- CỘT 1: KHU VỰC -->
             <div class="col-md-3">
@@ -43,13 +20,13 @@
                     <ul class="list-group list-group-flush">
                         @foreach ($areas as $index => $area)
                             <li class="list-group-item p-0">
-                                <a href="{{ route('home', ['province' => $area['province']]) }}"
+                                <a href="{{ route('showtimes.index', ['province' => $area['province']]) }}"
                                     class="d-flex justify-content-between align-items-center px-3 py-2 text-decoration-none
-                                                {{ $area['province'] === $selectedProvinceDisplay ? 'text-dark bg-active fw-bold rounded' : 'text-dark' }}">
+                                                        {{ $area['province'] === $selectedProvinceDisplay ? 'text-dark bg-active fw-bold rounded' : 'text-dark' }}">
                                     {{ $area['province'] }}
                                     <span
                                         class="badge 
-                                                        {{ $area['province'] === $selectedProvinceDisplay ? 'bg-active text-dark' : 'bg-light text-dark' }}">
+                                                                {{ $area['province'] === $selectedProvinceDisplay ? 'bg-active text-dark' : 'bg-light text-dark' }}">
                                         {{ $area['count'] }}
                                     </span>
                                 </a>
@@ -76,7 +53,7 @@
                             @foreach ($cinemas as $cinema)
                                 <li
                                     class="list-group-item {{ $cinema->id == $activeId ? 'text-dark bg-active fw-bold rounded' : '' }}">
-                                    <a href="{{ route('home', ['province' => $selectedProvinceDisplay, 'cinema_id' => $cinema->id]) }}"
+                                    <a href="{{ route('showtimes.index', ['province' => $selectedProvinceDisplay, 'cinema_id' => $cinema->id]) }}"
                                         class="text-decoration-none d-block {{ $cinema->id == $activeId ? 'text-dark' : 'text-muted' }}">
                                         {{ $cinema->name }}
                                     </a>
@@ -93,20 +70,20 @@
                 <div class="d-flex justify-content-between mb-2 p-2" style="background: #edf2f9;">
                     <div class="d-flex gap-2 flex-wrap">
                         @foreach ($availableDates as $date)
-                        @php
-                            $carbon = \Carbon\Carbon::parse($date);
-                            $formattedDate = $carbon->format('j/n');
-                            $weekday = $carbon->translatedFormat('D');
-                            $isActive = request('date') === $date || (!request('date') && $loop->first);
-                        @endphp
+                            @php
+                                $carbon = \Carbon\Carbon::parse($date);
+                                $formattedDate = $carbon->format('j/n');
+                                $weekday = $carbon->translatedFormat('D');
+                                $isActive = request('date') === $date || (!request('date') && $loop->first);
+                            @endphp
 
-                        <a href="{{ request()->fullUrlWithQuery(['date' => $date]) }}"
-                            class="time-showtimes btn btn-sm border-end pe-3 text-center fw-bold {{ $isActive ? 'text-dark' : 'text-muted' }}"
-                            style="width: 60px; min-height: 48px; border-radius: 0;">
-                            {{ $formattedDate }}<br>
-                            <small>{{ $weekday }}</small>
-                        </a>
-                    @endforeach
+                            <a href="{{ request()->fullUrlWithQuery(['date' => $date]) }}"
+                                class="time-showtimes btn btn-sm border-end pe-3 text-center fw-bold {{ $isActive ? 'text-dark' : 'text-muted' }}"
+                                style="width: 60px; min-height: 48px; border-radius: 0;">
+                                {{ $formattedDate }}<br>
+                                <small>{{ $weekday }}</small>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
 
@@ -119,8 +96,8 @@
                 @if ($selectedCinemaId)
                     @php
                         $selectedCinema = \App\Models\Cinema::find($selectedCinemaId);
-                        $formattedDate = $selectedDate 
-                            ? \Carbon\Carbon::parse($selectedDate)->translatedFormat('l, d/m/Y') 
+                        $formattedDate = $selectedDate
+                            ? \Carbon\Carbon::parse($selectedDate)->translatedFormat('l, d/m/Y')
                             : '';
                     @endphp
 
@@ -131,8 +108,9 @@
                                 · {{ $formattedDate }}
                             @endif
                             <br>
-                            {{ $selectedCinema->location }} – 
-                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($selectedCinema->location) }}" target="_blank">Bản đồ</a>
+                            {{ $selectedCinema->location }} –
+                            <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($selectedCinema->location) }}"
+                                target="_blank">Bản đồ</a>
                         </div>
                     @endif
                 @endif

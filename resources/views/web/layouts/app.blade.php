@@ -144,6 +144,21 @@
             overflow: hidden; 
             text-overflow: ellipsis;
         }
+        .showtimes-title{
+            padding-bottom: 10px;
+            border-bottom: 1px solid #8f8f8fff;
+        }
+        .time-showtimes:active {
+            border:unset;
+        }
+        .search-common:focus{
+            outline: 0;
+            box-shadow: unset;
+            border-color: #dee2e6;
+        }
+        .bg-active{
+            background: #edf2f9;
+        }
     </style>
 </head>
 
@@ -195,7 +210,7 @@
                     <form class="d-none d-lg-block" style="width: 220px;">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-                            <input class="form-control border-start-0" type="search" placeholder="Tìm phim, rạp...">
+                            <input class="form-control border-start-0 search-common" type="search" placeholder="Tìm phim, rạp...">
                         </div>
                     </form>
 
