@@ -72,7 +72,7 @@
             z-index: 1;
             position: relative;
         }
-                /* Tạo lớp col để chia 5 phim 1 hàng */
+        /* Tạo lớp col để chia 5 phim 1 hàng */
         @media (min-width: 1200px) {
             .col-xxl-1-5 {
                 flex: 0 0 auto;
@@ -137,6 +137,13 @@
             background-color: #f8f9fa;
             color: #000;
         }
+
+        .title-movie {
+            font-size: 13px; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+        }
     </style>
 </head>
 
@@ -160,7 +167,7 @@
                         <a class="nav-link text-danger fw-semibold" href="{{ route('home') }}">Đặt vé phim chiếu rạp</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#">Lịch chiếu</a>
+                        <a class="nav-link text-secondary" href="{{ route('showtimes.index') }}">Lịch chiếu</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-secondary" href="#" data-bs-toggle="dropdown">Phim</a>

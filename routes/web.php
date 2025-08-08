@@ -11,6 +11,8 @@ Route::get('/phim-sap-chieu', [\App\Http\Controllers\Web\MovieController::class,
     ->name('movies.coming_soon');
 Route::get('/phim-trong-thang', [\App\Http\Controllers\Web\MovieController::class, 'thisMonth'])
     ->name('movies.this_month');
+Route::get('/lich-chieu', [\App\Http\Controllers\Web\ShowtimeController::class, 'index'])
+    ->name('showtimes.index');
 
 
 

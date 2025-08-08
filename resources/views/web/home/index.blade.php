@@ -8,20 +8,20 @@
 
             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 justify-content-center">
                 @foreach ($movies->take(9) as $movie)
-                    <div class="col bg-white border rounded" style="max-width: 140px;">
-                        <div>
+                    <div class="col" style="max-width: 140px;">
+                        <div class="bg-white border rounded shadow-sm">
                             <div class="position-relative">
                                 <a href="#" class="text-decoration-none border-none">
-                                    <img src="{{ asset($movie->image) }}" class="rounded w-100" style="height: 170px;">
+                                    <img src="{{ asset($movie->image) }}" class="rounded w-100" style="height: 185px;">
                                 </a>
                                 <a href="#"
                                     class="fw-bold position-absolute bottom-0 start-0 end-0 bg-danger text-white py-1 text-decoration-none text-center"
                                     style="font-size: 12px;">Mua vé</a>
                             </div>
-                            <div class="text-dark mt-2 fw-bold" style="font-size: 13px; overflow: hidden;">
+                            <div class="title-movie text-dark mt-2 fw-bold px-2">
                                 <a href="#" class="text-decoration-none text-dark">{{ $movie->title }}</a>
                             </div>
-                            <div class="text-muted fw-bold mb-2" style="font-size: 12px;">
+                            <div class="text-muted fw-bold mb-2 px-2" style="font-size: 12px;">
                                 {{ \Carbon\Carbon::parse($movie->release_date)->format('d/m') }}
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 @extends('web.layouts.app')
-@section('title', 'Phim Đang Chiếu')
+@section('title', 'Phim đang chiếu rạp')
 
 @section('content')
 
