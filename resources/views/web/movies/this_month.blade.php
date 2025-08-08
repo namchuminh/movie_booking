@@ -3,13 +3,11 @@
 
 @section('content')
 
-    <div class="container-fluid mb-3">
-        <div class="movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
-            <h5 class="fw-bold mb-3 text-white">Lịch phim tháng {{ now()->format('m/Y') }}</h5>
-            <p class="mb-0">
-                Lịch phim dự kiến sẽ ra mắt tại các rạp trên toàn quốc vào tháng 08/2025
-            </p>
-        </div>
+    <div class="container-fluid mb-3 movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
+        <h5 class="fw-bold mb-3 text-white">Lịch phim tháng {{ now()->format('m/Y') }}</h5>
+        <p class="mb-0">
+            Lịch phim dự kiến sẽ ra mắt tại các rạp trên toàn quốc vào tháng 08/2025
+        </p>
     </div>
 
     <div class="container my-4">

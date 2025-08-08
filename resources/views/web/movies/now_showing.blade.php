@@ -3,14 +3,12 @@
 
 @section('content')
 
-    <div class="container-fluid mb-3">
-        <div class="movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
-            <h5 class="fw-bold mb-3 text-white">Phim đang chiếu</h5>
-            <p class="mb-0">
-                Danh sách các phim hiện đang chiếu rạp trên toàn quốc {{ now()->format('d/m/Y') }}.
-                Xem lịch chiếu phim, giá vé tiện lợi, đặt vé nhanh chỉ với 1 bước!
-            </p>
-        </div>
+    <div class="container-fluid mb-3 movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
+        <h5 class="fw-bold mb-3 text-white">Phim đang chiếu</h5>
+        <p class="mb-0">
+            Danh sách các phim hiện đang chiếu rạp trên toàn quốc {{ now()->format('d/m/Y') }}.
+            Xem lịch chiếu phim, giá vé tiện lợi, đặt vé nhanh chỉ với 1 bước!
+        </p>
     </div>
 
     <div class="container my-4">

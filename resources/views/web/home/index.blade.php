@@ -2,10 +2,9 @@
 @section('title', 'Trang Chủ')
 
 @section('content')
-    <div class="container-fluid bg-light py-4 border-bottom">
+    <div class="container-fluid bg-light py-4 pb-5 border-bottom" style="background-image: url(https://cdn.moveek.com/build/images/tix-banner.ed8b6071.png); background-repeat: round;">
         <div class="container">
-            <h5 class="text-center mb-4">Mua vé theo phim</h5>
-
+            <h5 class="text-center mb-4 text-white">Mua vé theo phim</h5>
             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3 justify-content-center">
                 @foreach ($movies->take(9) as $movie)
                     <div class="col" style="max-width: 140px;">
@@ -34,7 +33,6 @@
     <!-- PHẦN 'MUA VÉ THEO RẠP' CHUẨN THEO GIAO DIỆN HÌNH ẢNH MỚI -->
 
     <div class="container my-4">
-        <h5 class="text-center mb-4">Mua vé theo rạp</h5>
         <div class="row">
             <!-- CỘT 1: KHU VỰC -->
             <div class="col-md-3">

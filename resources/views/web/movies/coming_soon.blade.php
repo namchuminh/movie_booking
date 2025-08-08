@@ -3,13 +3,11 @@
 
 @section('content')
 
-<div class="container-fluid mb-3">
-    <div class="movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
-        <h5 class="fw-bold mb-3 text-white">Sắp chiếu</h5>
-        <p class="mb-0">
-            Danh sách các phim dự kiến sẽ khởi chiếu tại các hệ thống rạp trên toàn quốc.
-        </p>
-    </div>
+<div class="container-fluid mb-3 movie-banner d-flex flex-column justify-content-center align-items-center text-white text-center">
+    <h5 class="fw-bold mb-3 text-white">Sắp chiếu</h5>
+    <p class="mb-0">
+        Danh sách các phim dự kiến sẽ khởi chiếu tại các hệ thống rạp trên toàn quốc.
+    </p>
 </div>
 
 <div class="container my-4">

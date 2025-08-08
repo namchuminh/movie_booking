@@ -146,7 +146,7 @@
         }
         .showtimes-title{
             padding-bottom: 10px;
-            border-bottom: 1px solid #8f8f8fff;
+            border-bottom: 1px solid #edf2f9;
         }
         .time-showtimes:active {
             border:unset;
