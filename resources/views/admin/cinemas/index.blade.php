@@ -71,6 +71,7 @@
                         <th>#</th>
                         <th>Ảnh</th>
                         <th>Tên Rạp</th>
+                        <th>Tỉnh/Thành</th>
                         <th>Địa Chỉ</th>
                         <th>Điện Thoại</th>
                         <th>Hành Động</th>
@@ -88,6 +89,7 @@
                                 @endif
                             </td>
                             <td>{{ $cinema->name }}</td>
+                            <td>{{ $cinema->province }}</td>
                             <td>{{ $cinema->location }}</td>
                             <td>{{ $cinema->phone ?? '-' }}</td>
                             <td>

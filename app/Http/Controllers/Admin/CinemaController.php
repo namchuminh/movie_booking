@@ -41,15 +41,19 @@ class CinemaController extends Controller
             'location'  => 'required|string|max:500',
             'phone'    => 'nullable|string|max:50',
             'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'province' => 'required|string|max:100',
+            'type'     => 'required|string|max:100',
         ], [
             'name.required'     => 'Vui lòng nhập tên rạp.',
             'location.required'  => 'Vui lòng nhập địa chỉ.',
             'image.image'       => 'Tệp phải là hình ảnh.',
             'image.mimes'       => 'Ảnh chỉ chấp nhận jpeg, png, jpg, gif.',
             'image.max'         => 'Kích thước ảnh không quá 2MB.',
+            'province.required' => 'Vui lòng chọn tỉnh thành.',
+            'type.required'     => 'Vui lòng chọn loại rạp.',
         ]);
 
-        $data = $request->only(['name', 'location', 'phone']);
+        $data = $request->only(['name', 'location', 'phone', 'province', 'type']);
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/cinemas', 'public');
@@ -80,17 +84,21 @@ class CinemaController extends Controller
             'location'  => 'required|string|max:500',
             'phone'    => 'nullable|string|max:50',
             'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'province' => 'required|string|max:100',
+            'type'     => 'required|string|max:100',
         ], [
             'name.required'     => 'Vui lòng nhập tên rạp.',
             'location.required'  => 'Vui lòng nhập địa chỉ.',
             'image.image'       => 'Tệp phải là hình ảnh.',
             'image.mimes'       => 'Ảnh chỉ chấp nhận jpeg, png, jpg, gif.',
             'image.max'         => 'Kích thước ảnh không quá 2MB.',
+            'province.required' => 'Vui lòng chọn tỉnh thành.',
+            'type.required'     => 'Vui lòng chọn loại rạp.',
         ]);
 
         $cinema = Cinema::findOrFail($id);
 
-        $data = $request->only(['name', 'location', 'phone']);
+        $data = $request->only(['name', 'location', 'phone', 'province', 'type']);
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/cinemas', 'public');

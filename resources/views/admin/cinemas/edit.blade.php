@@ -40,6 +40,83 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Tên Chuỗi Rạp</label>
+                            <select name="type" class="form-control">
+                                <option value="">-- Chọn chuỗi rạp --</option>
+                                @php
+                                    $brands = [
+                                        'CGV',
+                                        'Lotte Cinema',
+                                        'BHD Star Cineplex',
+                                        'Galaxy Cinema',
+                                        'Cinestar',
+                                        'Mega GS',
+                                        'Beta Cineplex',
+                                        'Beta Cinema',
+                                        'DCine',
+                                        'Starlight',
+                                        'Rap Tháng 8',
+                                        'Rap Bến Thành',
+                                        'Rap Đống Đa',
+                                        'Cinebox',
+                                        'YouCine',
+                                        'The Loop',
+                                        'Nhà Văn Hóa',
+                                        'Xe chiếu phim lưu động',
+                                    ];
+                                @endphp
+
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand }}" {{ old('type', $cinema->type) == $brand ? 'selected' : '' }}>
+                                        {{ $brand }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('type') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        @php
+                            $areas = [
+                                ['name' => 'Tp. Hồ Chí Minh'],
+                                ['name' => 'Đồng Nai'],
+                                ['name' => 'Đắk Lắk'],
+                                ['name' => 'Đà Nẵng'],
+                                ['name' => 'Bình Định'],
+                                ['name' => 'Thái Nguyên'],
+                                ['name' => 'Hà Nội'],
+                                ['name' => 'Lâm Đồng'],
+                                ['name' => 'Thanh Hóa'],
+                                ['name' => 'Bắc Giang'],
+                                ['name' => 'Khánh Hòa'],
+                                ['name' => 'Sóc Trăng'],
+                                ['name' => 'Thừa Thiên – Huế'],
+                                ['name' => 'Gia Lai'],
+                                ['name' => 'Long An'],
+                                ['name' => 'Quảng Bình'],
+                                ['name' => 'Tiền Giang'],
+                                ['name' => 'Quảng Trị'],
+                                ['name' => 'Bình Dương'],
+                                ['name' => 'Kon Tum'],
+                                ['name' => 'Quảng Nam'],
+                                ['name' => 'Kiên Giang'],
+                                ['name' => 'Lào Cai'],
+                            ];
+                        @endphp
+
+                        <div class="form-group">
+                            <label>Tỉnh Thành</label>
+                            <select name="province" class="form-control">
+                                <option value="">-- Chọn tỉnh thành --</option>
+                                @foreach ($areas as $area)
+                                    <option value="{{ $area['name'] }}" {{ old('province', $cinema->province) == $area['name'] ? 'selected' : '' }}>
+                                        {{ $area['name'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('province') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label>Địa Chỉ</label>
                             <input type="text" name="location" class="form-control" value="{{ old('location', $cinema->location) }}" placeholder="Địa chỉ chi tiết">
                             @error('location') <span class="text-danger">{{ $message }}</span> @enderror
