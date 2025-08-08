@@ -27,6 +27,7 @@
             font-size: 0.9rem;
             color: #6c757d;
         }
+
         .navbar .nav-link {
             font-size: 14px;
             padding: 0.5rem 0.75rem;
@@ -44,15 +45,104 @@
         }
 
         .border-bottom {
-            border-bottom: 1px solid #e3ebf6 !important;
+            border-bottom: 2px solid #e3ebf6 !important;
         }
 
+        .movie-banner {
+            height: 200px;
+            background-image: url('https://cdn.moveek.com/build/images/tix-banner.ed8b6071.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            z-index: 1;
+            background-color: #000;
+            /* fallback */
+        }
+
+        .movie-banner::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .movie-banner h2,
+        .movie-banner p {
+            z-index: 1;
+            position: relative;
+        }
+                /* Tạo lớp col để chia 5 phim 1 hàng */
+        @media (min-width: 1200px) {
+            .col-xxl-1-5 {
+                flex: 0 0 auto;
+                width: 20%;
+            }
+        }
+
+        .poster-wrapper {
+            aspect-ratio: 290 / 427;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px 4px 0 0;
+            background-color: #f0f0f0;
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: 150px;
+        }
+
+        .movie-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: box-shadow 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .movie-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-custom {
+            position: absolute;
+            top: 8px;
+            /* dịch xuống từ top */
+            left: 0px;
+            /* cách lề trái */
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 0;
+            /* bỏ bo góc */
+            z-index: 1;
+        }
+
+        .dropdown-menu {
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
+        .dropdown-item {
+            color: #6c757d;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item.active {
+            background-color: #f8f9fa;
+            color: #000;
+        }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-white border-bottom py-2">
+    <nav class="navbar navbar-expand-lg bg-white py-2">
         <div class="container">
             <a class="navbar-brand d-lg-none" href="#">
                 <img src="https://cdn.moveek.com/bundles/ornweb/img/logo.png" alt="Logo" height="30">
@@ -75,9 +165,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-secondary" href="#" data-bs-toggle="dropdown">Phim</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Phim đang chiếu</a></li>
-                            <li><a class="dropdown-item" href="#">Phim sắp chiếu</a></li>
-                            <li><a class="dropdown-item" href="#">Phim tháng {{ date('m') }}/{{ date('Y') }}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('movies.now_showing') }}">Phim đang chiếu</a></li>
+                            <li><a class="dropdown-item" href="{{ route('movies.coming_soon') }}">Phim sắp chiếu</a></li>
+                            <li><a class="dropdown-item" href="{{ route('movies.this_month') }}">Phim tháng {{ date('m') }}/{{ date('Y') }}</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

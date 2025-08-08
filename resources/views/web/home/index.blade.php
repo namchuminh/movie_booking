@@ -21,7 +21,7 @@
                             <div class="text-dark mt-2 fw-bold" style="font-size: 13px; overflow: hidden;">
                                 <a href="#" class="text-decoration-none text-dark">{{ $movie->title }}</a>
                             </div>
-                            <div class="text-muted fw-bold" style="font-size: 12px;">
+                            <div class="text-muted fw-bold mb-2" style="font-size: 12px;">
                                 {{ \Carbon\Carbon::parse($movie->release_date)->format('d/m') }}
                             </div>
                         </div>
@@ -39,17 +39,17 @@
             <!-- CỘT 1: KHU VỰC -->
             <div class="col-md-3">
                 <div class="bg-white rounded shadow-sm py-2 px-2" style="font-size: 14px;">
-                    <div class="fw-bold mb-2 text-secondary">Khu vực</div>
+                    <div class="fw-bold mb-2 text-dark">Khu vực</div>
                     <ul class="list-group list-group-flush">
                         @foreach ($areas as $index => $area)
                             <li class="list-group-item p-0">
                                 <a href="{{ route('home', ['province' => $area['province']]) }}"
                                     class="d-flex justify-content-between align-items-center px-3 py-2 text-decoration-none
-                                                {{ $area['province'] === $selectedProvinceDisplay ? 'text-white bg-danger fw-bold rounded' : 'text-muted' }}">
+                                                {{ $area['province'] === $selectedProvinceDisplay ? 'text-dark bg-light fw-bold rounded' : 'text-dark' }}">
                                     {{ $area['province'] }}
                                     <span
                                         class="badge 
-                                                        {{ $area['province'] === $selectedProvinceDisplay ? 'bg-light text-danger' : 'bg-light text-dark' }}">
+                                                        {{ $area['province'] === $selectedProvinceDisplay ? 'bg-light text-dark' : 'bg-light text-dark' }}">
                                         {{ $area['count'] }}
                                     </span>
                                 </a>
@@ -69,15 +69,15 @@
                     @endphp
 
                     @foreach ($cinemasByType as $type => $cinemas)
-                        <div class="fw-bold {{ !$loop->first ? 'my-2' : 'mb-2' }} text-secondary">
+                        <div class="fw-bold {{ !$loop->first ? 'my-2' : 'mb-2' }} text-dark">
                             {{ $type }}
                         </div>
                         <ul class="list-group list-group-flush">
                             @foreach ($cinemas as $cinema)
                                 <li
-                                    class="list-group-item {{ $cinema->id == $activeId ? 'text-white bg-danger fw-bold rounded' : '' }}">
+                                    class="list-group-item {{ $cinema->id == $activeId ? 'text-dark bg-light fw-bold rounded' : '' }}">
                                     <a href="{{ route('home', ['province' => $selectedProvinceDisplay, 'cinema_id' => $cinema->id]) }}"
-                                        class="text-decoration-none d-block {{ $cinema->id == $activeId ? 'text-white' : 'text-muted' }}">
+                                        class="text-decoration-none d-block {{ $cinema->id == $activeId ? 'text-dark' : 'text-muted' }}">
                                         {{ $cinema->name }}
                                     </a>
                                 </li>
@@ -101,7 +101,7 @@
                         @endphp
 
                         <a href="{{ request()->fullUrlWithQuery(['date' => $date]) }}"
-                            class="btn btn-sm border-end pe-3 text-center fw-bold {{ $isActive ? 'text-danger' : 'text-muted' }}"
+                            class="btn btn-sm border-end pe-3 text-center fw-bold {{ $isActive ? 'text-dark' : 'text-muted' }}"
                             style="width: 60px; min-height: 48px; border-radius: 0;">
                             {{ $formattedDate }}<br>
                             <small>{{ $weekday }}</small>
@@ -125,7 +125,7 @@
                     @endphp
 
                     @if ($selectedCinema)
-                        <div class="bg-light p-2 rounded text-muted mb-3" style="font-size: 13px;">
+                        <div class="bg-light p-2 rounded text-dark mb-3" style="font-size: 13px;">
                             <b>{{ $selectedCinema->name }}</b>
                             @if ($formattedDate)
                                 · {{ $formattedDate }}
@@ -196,4 +196,7 @@
             </div>
         </div>
     </div>
+    <script>
+        window.history.replaceState({}, document.title, "{{ url()->current() }}");
+    </script>
 @endsection

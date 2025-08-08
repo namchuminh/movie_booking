@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->name('home');
+Route::get('/phim-dang-chieu', [\App\Http\Controllers\Web\MovieController::class, 'nowShowing'])
+    ->name('movies.now_showing');
+Route::get('/phim-sap-chieu', [\App\Http\Controllers\Web\MovieController::class, 'comingSoon'])
+    ->name('movies.coming_soon');
+Route::get('/phim-trong-thang', [\App\Http\Controllers\Web\MovieController::class, 'thisMonth'])
+    ->name('movies.this_month');
+
+
 
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');

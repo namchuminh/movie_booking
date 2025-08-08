@@ -70,7 +70,12 @@
 
                         <div class="form-group">
                             <label>Ngôn Ngữ</label>
-                            <input type="text" name="language" class="form-control" value="{{ old('language') }}" placeholder="Tiếng Việt, English...">
+                            <select name="language" class="form-control">
+                                <option value="">-- Chọn ngôn ngữ --</option>
+                                <option value="Tiếng Việt" {{ old('language') == 'Tiếng Việt' ? 'selected' : '' }}>Tiếng Việt</option>
+                                <option value="Lồng tiếng" {{ old('language') == 'Lồng tiếng' ? 'selected' : '' }}>Lồng tiếng</option>
+                                <option value="Phụ đề" {{ old('language') == 'Phụ đề' ? 'selected' : '' }}>Phụ đề</option>
+                            </select>
                             @error('language') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
