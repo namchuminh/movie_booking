@@ -17,6 +17,9 @@ Route::get('/khuyen-mai', [\App\Http\Controllers\Web\PromotionController::class,
     ->name('promotions.index');
 Route::get('/rap-phim/{id}', [\App\Http\Controllers\Web\CinemaController::class, 'show'])
     ->name('cinemas.show');
+Route::get('/ho-tro', function () {
+    return view('web.contact.index');
+})->name('contact');
 
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');

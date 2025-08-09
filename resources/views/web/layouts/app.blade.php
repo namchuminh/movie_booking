@@ -16,8 +16,7 @@
         }
 
         .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #edf2f9;
         }
 
         footer {
@@ -177,6 +176,27 @@
             box-shadow: unset;
             border-color: #dee2e6;
         }
+
+        /* Nền xanh nhạt như ảnh */
+        .cinema-hero2{ background: #edf2f9 !important; border: 1px solid #e3ebf6 !important; }
+        /* Avatar tròn */
+        .cinema-avatar2{
+            width:72px; height:72px; background:#fff; border:1px solid #e5e7eb;
+        }
+        /* Tinh chỉnh chữ nhỏ gọn */
+        .cinema-meta22 a{ font-weight:600; }
+        a {
+            text-decoration: none;
+        }
+        .support-page a {
+            font-size: 1.2rem;
+        }
+        .body-contact a{
+            font-size: 14px;
+        }
+        .list-contact a{
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -232,7 +252,7 @@
                         </div>
                     </form>
 
-                    <a href="#" class="text-secondary text-decoration-none d-flex align-items-center gap-1 small">
+                    <a href="{{ route('contact') }}" class="text-secondary text-decoration-none d-flex align-items-center gap-1 small">
                         <i class="bi-question-circle"></i> <span class="d-none d-lg-inline">Hỗ trợ</span>
                     </a>
                     <a href="#" class="text-secondary text-decoration-none d-flex align-items-center gap-1 small">
@@ -271,8 +291,7 @@
                         {{-- logo / avatar rạp --}}
                         <div class="cinema-logo rounded-circle overflow-hidden d-flex align-items-center justify-content-center">
                             @if(!empty($c->image))
-                            <img src="{{ $c->image }}" alt="{{ $c->name }}" class="w-100 h-100" style="object-fit: cover;"
-                                onerror="this.remove()">
+                            <img src="{{ asset($c->image) }}" alt="{{ $c->name }}" class="w-100 h-100">
                             @else
                             <span class="fw-bold">{{ Str::substr($c->name,0,2) }}</span>
                             @endif
