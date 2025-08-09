@@ -7,12 +7,12 @@
     <title>@yield('title', 'Rạp Phim Việt')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background-color: #ffffffff;
-            font-family: 'Inter', sans-serif;
+            background-color: #f9fbfd;
+            font-family: 'Nunito', sans-serif;
         }
 
         .navbar {
@@ -21,7 +21,7 @@
         }
 
         footer {
-            background-color: #f8f9fa;
+            background: #edf2f9;
             border-top: 1px solid #dee2e6;
             padding: 40px 0 20px;
             font-size: 0.9rem;
@@ -151,13 +151,17 @@
         .time-showtimes:active {
             border:unset;
         }
+        .time-showtimes:hover {
+            background-color: #c7d6ec; 
+            border-color: #bdcfe9;
+        }
         .search-common:focus{
             outline: 0;
             box-shadow: unset;
             border-color: #dee2e6;
         }
         .bg-active{
-            background: #edf2f9;
+            background: #2c7be5;
         }
     </style>
 </head>
@@ -215,7 +219,7 @@
                     </form>
 
                     <a href="#" class="text-secondary text-decoration-none d-flex align-items-center gap-1 small">
-                        <i class="bi bi-geo-alt"></i> <span class="d-none d-lg-inline">Hỗ trợ</span>
+                        <i class="bi-question-circle"></i> <span class="d-none d-lg-inline">Hỗ trợ</span>
                     </a>
                     <a href="#" class="text-secondary text-decoration-none d-flex align-items-center gap-1 small">
                         <i class="bi bi-person"></i> <span class="d-none d-lg-inline">Tài khoản</span>
@@ -227,7 +231,7 @@
 
     @yield('content')
 
-    <footer class="bg-light border-top py-4 mt-5">
+    <footer class="border-top py-4 mt-5">
         <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="d-flex align-items-start mb-3 mb-md-0 col-md-6">
                 <img src="https://cdn.moveek.com/bundles/ornweb/img/favicon-large.png" alt="Logo" width="50"
