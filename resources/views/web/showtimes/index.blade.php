@@ -18,7 +18,7 @@
                     <ul class="list-group list-group-flush">
                         @foreach ($areas as $index => $area)
                             <li class="list-group-item p-0 bg-white">
-                                <a href="{{ route('home', ['province' => $area['province']]) }}"
+                                <a href="{{ route('showtimes.index', ['province' => $area['province']]) }}"
                                     class="d-flex justify-content-between align-items-center px-3 py-3 text-decoration-none
                                                 {{ $area['province'] === $selectedProvinceDisplay ? 'text-white bg-active' : 'text-muted' }}">
                                     {{ $area['province'] }}
@@ -51,7 +51,7 @@
                             @foreach ($cinemas as $cinema)
                                 <li
                                     class="list-group-item {{ $cinema->id == $activeId ? 'text-white bg-active' : 'bg-white' }}">
-                                    <a href="{{ route('home', ['province' => $selectedProvinceDisplay, 'cinema_id' => $cinema->id]) }}"
+                                    <a href="{{ route('showtimes.index', ['province' => $selectedProvinceDisplay, 'cinema_id' => $cinema->id]) }}"
                                         class="py-2 text-decoration-none d-block {{ $cinema->id == $activeId ? 'text-white' : 'text-muted' }}">
                                         {{ $cinema->name }}
                                     </a>

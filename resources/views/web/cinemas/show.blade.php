@@ -155,4 +155,7 @@
             </div>
         </div>
     </div>
+    <script>
+        window.history.replaceState({}, document.title, "{{ url()->current() }}");
+    </script>
 @endsection
