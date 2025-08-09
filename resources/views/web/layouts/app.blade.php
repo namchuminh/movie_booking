@@ -163,6 +163,20 @@
         .bg-active{
             background: #2c7be5;
         }
+        .cinema-logo{ width:40px; height:40px; background:#f3f4f6; font-size:12px }
+        #cinemaList .list-group-item{ border-left:0; border-right:0 }
+
+        #cinemaSearchInput:focus {
+            outline: 0;
+            box-shadow: unset;
+            border-color: #dee2e6;
+        }
+
+        #cinemaProvinceSelect:focus {
+            outline: 0;
+            box-shadow: unset;
+            border-color: #dee2e6;
+        }
     </style>
 </head>
 
@@ -197,7 +211,7 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-secondary" href="#" data-bs-toggle="dropdown">Rạp</a>
+                        <a class="nav-link dropdown-toggle text-secondary" href="#" data-bs-toggle="dropdown" role="button" id="openCinemasModal">Rạp</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-secondary" href="{{ route('promotions.index') }}">Khuyến mãi</a>
@@ -230,7 +244,89 @@
     </nav>
 
     @yield('content')
+    <div class="modal fade" id="cinemaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body">
+                    {{-- Thanh tìm kiếm + chọn tỉnh --}}
+                    <div class="d-flex gap-2 mb-3">
+                    <div class="flex-grow-1 position-relative">
+                        <input id="cinemaSearchInput" type="text" class="form-control" placeholder="Tìm rạp tại">
+                    </div>
+                    <select id="cinemaProvinceSelect" class="form-select" style="max-width: 260px;">
+                        <option value="">Tất cả tỉnh/thành</option>
+                        @foreach(($provinces ?? []) as $province)
+                            <option value="{{ $province }}">{{ $province }}</option>
+                        @endforeach
+                    </select>
+                    </div>
 
+                    {{-- Danh sách rạp --}}
+                    <ul id="cinemaList" class="list-group list-group-flush">
+                    @forelse(($cinemas ?? []) as $c)
+                        <li class="list-group-item py-3 cinema-item d-flex align-items-center gap-3"
+                            data-province="{{ $c->province }}"
+                            data-name="{{ Str::lower($c->name) }}"
+                            data-location="{{ Str::lower($c->location) }}">
+                        {{-- logo / avatar rạp --}}
+                        <div class="cinema-logo rounded-circle overflow-hidden d-flex align-items-center justify-content-center">
+                            @if(!empty($c->image))
+                            <img src="{{ $c->image }}" alt="{{ $c->name }}" class="w-100 h-100" style="object-fit: cover;"
+                                onerror="this.remove()">
+                            @else
+                            <span class="fw-bold">{{ Str::substr($c->name,0,2) }}</span>
+                            @endif
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <div class="d-flex align-items-center gap-2">
+                            <a href="{{ route('cinemas.show', $c->id) ?? '#' }}" class="link-dark text-decoration-none fw-semibold">
+                                {{ $c->name }}
+                            </a>
+                            <span class="badge bg-primary-subtle text-primary border border-primary">{{ $c->type }}</span>
+                            </div>
+                            <div class="small text-muted">
+                            {{ $c->location }}{{ $c->location ? ', ' : '' }}{{ $c->province }}
+                            </div>
+                        </div>
+                        </li>
+                    @empty
+                        <li class="list-group-item text-center text-muted">Chưa có rạp.</li>
+                    @endforelse
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function(){
+            const openBtn   = document.getElementById('openCinemasModal');
+            const modalEl   = document.getElementById('cinemaModal');
+            const searchInp = document.getElementById('cinemaSearchInput');
+            const province  = document.getElementById('cinemaProvinceSelect');
+            const listItems = () => Array.from(document.querySelectorAll('#cinemaList .cinema-item'));
+            let modal;
+
+            function ensureModal(){ if(!modal) modal = new bootstrap.Modal(modalEl); return modal; }
+
+            function normalize(v){ return (v||'').toString().trim().toLowerCase(); }
+
+            function applyFilter(){
+                const q = normalize(searchInp.value);
+                const p = province.value;
+                listItems().forEach(li=>{
+                const okProvince = !p || li.dataset.province === p;
+                const hay = (li.dataset.name + ' ' + li.dataset.location);
+                const okQuery   = !q || hay.includes(q);
+                li.classList.toggle('d-none', !(okProvince && okQuery));
+                });
+            }
+
+            openBtn?.addEventListener('click', (e)=>{ e.preventDefault(); ensureModal().show(); setTimeout(()=>searchInp.focus(),200); });
+            searchInp?.addEventListener('input', applyFilter);
+            province?.addEventListener('change', applyFilter);
+        })();
+    </script>
     <footer class="border-top py-4 mt-5">
         <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
             <div class="d-flex align-items-start mb-3 mb-md-0 col-md-6">

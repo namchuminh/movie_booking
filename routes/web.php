@@ -15,7 +15,8 @@ Route::get('/lich-chieu', [\App\Http\Controllers\Web\ShowtimeController::class, 
     ->name('showtimes.index');
 Route::get('/khuyen-mai', [\App\Http\Controllers\Web\PromotionController::class, 'index'])
     ->name('promotions.index');
-
+Route::get('/rap-phim/{id}', [\App\Http\Controllers\Web\CinemaController::class, 'show'])
+    ->name('cinemas.show');
 
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
