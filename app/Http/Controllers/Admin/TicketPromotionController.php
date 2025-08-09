@@ -6,44 +6,49 @@ use App\Http\Controllers\Controller;
 use App\Models\Showtime;
 use App\Models\Promotion;
 use App\Models\TicketPromotion;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class TicketPromotionController extends Controller
 {
     public function index()
     {
-        $ticketPromotions = TicketPromotion::with(['showtime', 'promotion'])->paginate(10);
+        $ticketPromotions = TicketPromotion::with(['movie', 'promotion'])->paginate(10);
         return view('admin.ticket_promotions.index', compact('ticketPromotions'));
     }
 
     public function create()
     {
-        $showtimes = Showtime::with([
-            'movie:id,title',
-            'room:id,name,cinema_id', // load thêm cinema_id từ room
-            'room.cinema:id,name'     // load quan hệ cinema từ room
-        ])->select('id', 'movie_id', 'room_id', 'show_time')->get();
+        // Lấy phim đang chiếu hoặc sắp chiếu
+        $movies = Movie::where('release_date', '>=', now())->latest()->get();
 
         $promotions = Promotion::select('id', 'title', 'start_date', 'end_date', 'value')->get();
 
-        return view('admin.ticket_promotions.create', compact('showtimes', 'promotions'));
+        return view('admin.ticket_promotions.create', compact('movies', 'promotions'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'showtime_id' => 'required|exists:showtimes,id',
+            'movie_id' => 'required|exists:movies,id',
             'promo_id' => 'required|exists:promotions,id',
+        ], [
+            'movie_id.required' => 'Phim là bắt buộc.',
+            'promo_id.required' => 'Khuyến mãi là bắt buộc.',
+            'movie_id.exists' => 'Phim không tồn tại.',
+            'promo_id.exists' => 'Khuyến mãi không tồn tại.',
+            'promo_id.unique' => 'Khuyến mãi này đã được áp dụng cho phim này.',
+            'movie_id.unique' => 'Phim này đã có khuyến mãi mãi.',
         ]);
 
-        $exists = TicketPromotion::where('showtime_id', $request->showtime_id)
+        $exists = TicketPromotion::where('movie_id', $request->movie_id)
                                 ->exists();
 
         if ($exists) {
-            return redirect()->back()->withErrors(['msg' => 'Suất chiếu này hiện đã áp dụng giảm giá rồi!'])->withInput();
+            return redirect()->back()->withErrors(['msg' => 'Phim này hiện đã áp dụng giảm giá rồi!'])->withInput();
         }
 
-        TicketPromotion::create($request->only(['showtime_id', 'promo_id']));
+        TicketPromotion::create($request->only(['movie_id', 'promo_id']));
 
         return redirect()->route('admin.ticket-promotions.index')->with('success', 'Áp dụng khuyến mãi thành công.');
     }
@@ -51,29 +56,29 @@ class TicketPromotionController extends Controller
     public function edit($id)
     {
         $ticketPromotion = TicketPromotion::findOrFail($id);
-        $showtimes = Showtime::all();
+        $movies = Movie::where('release_date', '>=', now())->latest()->get();
         $promotions = Promotion::all();
-        return view('admin.ticket_promotions.edit', compact('ticketPromotion', 'showtimes', 'promotions'));
+        return view('admin.ticket_promotions.edit', compact('ticketPromotion', 'movies', 'promotions'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'showtime_id' => 'required|exists:showtimes,id',
+            'movie_id' => 'required|exists:movies,id',
             'promo_id' => 'required|exists:promotions,id',
         ], [
-            'showtime_id.required' => 'Suất chiếu là bắt buộc.',
+            'movie_id.required' => 'Phim là bắt buộc.',
             'promo_id.required' => 'Khuyến mãi là bắt buộc.',
-            'showtime_id.exists' => 'Suất chiếu không tồn tại.',
+            'movie_id.exists' => 'Phim không tồn tại.',
             'promo_id.exists' => 'Khuyến mãi không tồn tại.',
-            'promo_id.unique' => 'Khuyến mãi này đã được áp dụng cho suất chiếu này.',
-            'showtime_id.unique' => 'Suất chiếu này đã có khuyến mãi mãi.',
+            'promo_id.unique' => 'Khuyến mãi này đã được áp dụng cho phim này.',
+            'movie_id.unique' => 'Phim này đã có khuyến mãi mãi.',
         ]);
 
         $ticketPromotion = TicketPromotion::findOrFail($id);
 
         $ticketPromotion->update([
-            'showtime_id' => $request->showtime_id,
+            'movie_id' => $request->movie_id,
             'promo_id' => $request->promo_id,
         ]);
 
@@ -82,8 +87,8 @@ class TicketPromotionController extends Controller
 
     public function destroy($id)
     {
-        //Tìm theo showtime_id
-        $ticketPromotion = TicketPromotion::where('showtime_id', $id)->firstOrFail();
+        //Tìm theo movie_id
+        $ticketPromotion = TicketPromotion::where('movie_id', $id)->firstOrFail();
 
         $ticketPromotion->delete();
 

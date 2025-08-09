@@ -26,23 +26,23 @@
         <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Chọn suất chiếu và khuyến mãi</h3>
+                    <h3 class="card-title">Chọn phim và gắn khuyến mãi</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.ticket-promotions.store') }}">
                         @csrf
 
                         <div class="form-group">
-                            <label>Suất Chiếu</label>
-                            <select name="showtime_id" class="form-control">
-                                <option value="">-- Chọn suất chiếu --</option>
-                                @foreach($showtimes as $showtime)
-                                    <option value="{{ $showtime->id }}" {{ old('showtime_id') == $showtime->id ? 'selected' : '' }}>
-                                        {{ $showtime->movie->title }} | {{ $showtime->room->cinema->name }} - {{ $showtime->room->name }} | {{ $showtime->show_time }}
+                            <label>Chọn Phim</label>
+                            <select name="movie_id" class="form-control">
+                                <option value="">-- Chọn phim --</option>
+                                @foreach($movies as $movie)
+                                    <option value="{{ $movie->id }}" {{ old('movie_id') == $movie->id ? 'selected' : '' }}>
+                                        {{ $movie->title }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('showtime_id') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('movie_id') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="form-group">

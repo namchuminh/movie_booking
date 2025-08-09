@@ -200,7 +200,7 @@
                         <a class="nav-link dropdown-toggle text-secondary" href="#" data-bs-toggle="dropdown">Rạp</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#">Khuyến mãi</a>
+                        <a class="nav-link text-secondary" href="{{ route('promotions.index') }}">Khuyến mãi</a>
                     </li>
                 </ul>
 

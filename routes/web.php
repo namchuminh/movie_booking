@@ -13,7 +13,8 @@ Route::get('/phim-trong-thang', [\App\Http\Controllers\Web\MovieController::clas
     ->name('movies.this_month');
 Route::get('/lich-chieu', [\App\Http\Controllers\Web\ShowtimeController::class, 'index'])
     ->name('showtimes.index');
-
+Route::get('/khuyen-mai', [\App\Http\Controllers\Web\PromotionController::class, 'index'])
+    ->name('promotions.index');
 
 
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');

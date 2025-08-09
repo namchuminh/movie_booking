@@ -15,4 +15,9 @@ class Promotion extends Model
     {
         return $this->belongsToMany(Ticket::class, 'ticket_promotions');
     }
+
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class, 'ticket_promotions', 'promo_id', 'movie_id');
+    }
 }

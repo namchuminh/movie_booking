@@ -13,13 +13,13 @@ class TicketPromotion extends Model
 
     public $incrementing = false;
 
-    protected $primaryKey = 'showtime_id';
+    protected $primaryKey = 'movie_id';
 
-    protected $fillable = ['showtime_id', 'promo_id'];
+    protected $fillable = ['movie_id', 'promo_id'];
 
-    public function showtime()
+    public function movie()
     {
-        return $this->belongsTo(Showtime::class);
+        return $this->belongsTo(Movie::class);
     }
 
     public function promotion()

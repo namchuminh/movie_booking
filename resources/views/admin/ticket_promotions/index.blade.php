@@ -1,17 +1,17 @@
 @extends('admin.layouts.app')
-@section('title', 'Khuyến Mãi Suất Chiếu')
+@section('title', 'Khuyến Mãi Theo Phim')
 
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Khuyến Mãi Suất Chiếu</h1>
+                <h1>Khuyến Mãi Theo Phim</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Trang Chủ</a></li>
-                    <li class="breadcrumb-item active">Khuyến Mãi Suất Chiếu</li>
+                    <li class="breadcrumb-item active">Khuyến Mãi Theo Phim</li>
                 </ol>
             </div>
         </div>
@@ -31,10 +31,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Suất Chiếu</th>
+                        <th>Tên Phim</th>
                         <th>Khuyến Mãi</th>
-                        <th>Ngày Chiếu</th>
-                        <th>Giờ Chiếu</th>
                         <th>Hành Động</th>
                     </tr>
                 </thead>
@@ -43,18 +41,14 @@
                         <tr>
                             <td>{{ $loop->iteration + ($ticketPromotions->currentPage() - 1) * $ticketPromotions->perPage() }}</td>
                             <td>
-                                Phim: {{ $item->showtime->movie->title ?? 'N/A' }}<br>
-                                Rạp: {{ $item->showtime->room->cinema->name ?? 'N/A' }}<br>
-                                Phòng: {{ $item->showtime->room->name ?? 'N/A' }}<br>
+                                {{ $item->movie->title ?? 'N/A' }}
                             </td>
                             <td>{{ $item->promotion->title ?? 'N/A' }}<br>Giá trị giảm: {{ $item->promotion->value ?? 'N/A' }}%</td>
-                            <td>{{ \Carbon\Carbon::parse($item->showtime->show_date)->format('d/m/Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($item->showtime->show_time)->format('H:i') }}</td>
                             <td>
-                                <a href="{{ route('admin.ticket-promotions.edit', $item->showtime_id ) }}" class="btn btn-warning btn-sm">
+                                <a href="{{ route('admin.ticket-promotions.edit', $item->movie_id ) }}" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Sửa
                                 </a>
-                                <form action="{{ route('admin.ticket-promotions.destroy', $item->showtime_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa áp dụng này?')">
+                                <form action="{{ route('admin.ticket-promotions.destroy', $item->movie_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Xóa áp dụng này?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger btn-sm">
