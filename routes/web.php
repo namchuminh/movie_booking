@@ -21,6 +21,18 @@ Route::get('/ho-tro', function () {
     return view('web.contact.index');
 })->name('contact');
 
+Route::get('/mua-ve/{id}', [\App\Http\Controllers\Web\TicketController::class, 'show'])
+    ->name('tickets.show');
+Route::post('/mua-ve/{id}', [\App\Http\Controllers\Web\TicketController::class, 'checkout'])
+    ->name('tickets.checkout');
+Route::post('/thanh-toan', [\App\Http\Controllers\Web\TicketController::class, 'payment'])
+    ->name('tickets.payment');
+Route::get('/check-thanh-toan', [\App\Http\Controllers\Web\TicketController::class, 'checkPayment'])
+    ->name('tickets.check_payment');
+Route::get('/thong-tin-ve', [\App\Http\Controllers\Web\TicketController::class, 'info'])
+    ->name('tickets.info');
+Route::get('/in-ve/{id}', [\App\Http\Controllers\Web\TicketController::class, 'print'])->name('tickets.print');
+
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
 
