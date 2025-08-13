@@ -33,6 +33,16 @@ Route::get('/thong-tin-ve', [\App\Http\Controllers\Web\TicketController::class, 
     ->name('tickets.info');
 Route::get('/in-ve/{id}', [\App\Http\Controllers\Web\TicketController::class, 'print'])->name('tickets.print');
 
+Route::post('/dang-nhap', [\App\Http\Controllers\Web\UserController::class, 'login'])->name('login');
+Route::get('/khach-hang', [\App\Http\Controllers\Web\UserController::class, 'user'])->name('user');  
+Route::put('/khach-hang', [\App\Http\Controllers\Web\UserController::class, 'update'])->name('profile');
+Route::get('/dang-xuat', [\App\Http\Controllers\Web\UserController::class, 'logout'])->name('logout');
+
+Route::get('/dang-ky', [\App\Http\Controllers\Web\UserController::class, 'register'])->name('register');
+Route::post('/dang-ky', [\App\Http\Controllers\Web\UserController::class, 'registerSubmit'])->name('registerSubmit');
+
+
+
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
 Route::post('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginSubmit'])->name('admin.loginSubmit');
 

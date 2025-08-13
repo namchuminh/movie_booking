@@ -215,3 +215,14 @@ a {
 .list-contact a {
     font-size: 14px;
 }
+
+#loginPanel {
+    width: 320px !important;
+    max-width: 100%;
+}
+
+#loginPanel input:focus {
+    outline: 0;
+    box-shadow: unset;
+    border-color: #dee2e6;
+}
