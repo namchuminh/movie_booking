@@ -107,17 +107,17 @@
                         <div class="card-body">
                             <div class="mb-2">
                                 <label class="form-label">Họ và tên</label>
-                                <input name="customer_name" class="form-control">
+                                <input name="customer_name" class="form-control" value="{{ auth()->user() ? auth()->user()->username : '' }}" required>
                                 @error('customer_name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Email</label>
-                                <input name="customer_email" type="email" class="form-control">
+                                <input name="customer_email" type="email" class="form-control" value="{{ auth()->user() ? auth()->user()->email : '' }}" required>
                                 @error('customer_email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="mb-2">
                                 <label class="form-label">Số điện thoại</label>
-                                <input name="customer_phone" class="form-control">
+                                <input name="customer_phone" class="form-control" required>
                                 @error('customer_phone') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>

@@ -146,17 +146,20 @@ class TicketController extends Controller
 
     public function payment(Request $request)
     {
-        // Validate and process payment here
-        $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_email' => 'required|email|max:255',
-            'customer_phone' => 'required|string|max:20',
-        ], [
-            'customer_name.required' => 'Họ và tên là bắt buộc.',
-            'customer_email.required' => 'Email là bắt buộc.',
-            'customer_email.email' => 'Email không hợp lệ.',
-            'customer_phone.required' => 'Số điện thoại là bắt buộc.',
-        ]);
+        // Kiểm tra nếu đăng nhập rồi thì ko cần
+        if (!auth()->check()) {
+            // Validate and process payment here
+            $request->validate([
+                'customer_name' => 'required|string|max:255',
+                'customer_email' => 'required|email|max:255',
+                'customer_phone' => 'required|string|max:20',
+            ], [
+                'customer_name.required' => 'Họ và tên là bắt buộc.',
+                'customer_email.required' => 'Email là bắt buộc.',
+                'customer_email.email' => 'Email không hợp lệ.',
+                'customer_phone.required' => 'Số điện thoại là bắt buộc.',
+            ]);
+        }
 
         $customerName = $request->input('customer_name');
         $customerEmail = $request->input('customer_email');
@@ -257,6 +260,7 @@ class TicketController extends Controller
 
                 if (auth()->check()) {
                     $ticket->user_id     = auth()->id();
+                    $ticket->customer_phone = $request->input('customer_phone');
                 } else {
                     $ticket->customer_name  = $request->input('customer_name');
                     $ticket->customer_email = $request->input('customer_email');
