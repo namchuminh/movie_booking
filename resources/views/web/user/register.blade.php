@@ -62,7 +62,7 @@
                         <div class="col-12">
                             <button class="btn btn-dark w-100 py-2">Tạo tài khoản</button>
                             <div class="text-center mt-3">
-                                <small class="text-muted">Đã có tài khoản? <a href="#">Đăng
+                                <small class="text-muted">Đã có tài khoản? <a href="javascript:void(0)" id="btnAccount2">Đăng
                                         nhập!</a></small>
                             </div>
                         </div>
@@ -93,9 +93,14 @@
         }
     </style>
 
-    {{-- Nếu dùng reCAPTCHA thì mở dòng dưới --}}
-    {{--
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script> --}}
+    <script>
+    document.getElementById('btnAccount2').addEventListener('click', function () {
+        // Dùng Bootstrap Offcanvas API để mở
+        const panel = document.getElementById('loginPanel');
+        const bsOffcanvas = new bootstrap.Offcanvas(panel);
+        bsOffcanvas.show();
+    });
+    </script>
     <script>
         (function () {
             const canvas = document.getElementById('captchaCanvas');
