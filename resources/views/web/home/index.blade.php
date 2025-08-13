@@ -182,12 +182,12 @@
                                                 $finalPrice = $showtime->price + $seatPrice;
                                             @endphp
 
-                                            <button class="btn btn-sm" style="border-color: black; font-size: 11px;">
+                                            <a href="{{ route('tickets.show', $showtime->id) }}" class="btn btn-sm" style="border-color: black; font-size: 11px;">
                                                 {{ \Carbon\Carbon::parse($showtime->show_time)->format('H:i') }}<br>
                                                 <small class="text-muted">
                                                     {{ rtrim(rtrim(number_format($finalPrice / 1000, 1), '0'), '.') }}K
                                                 </small>
-                                            </button>
+                                            </a>
                                         @endforeach
                                     </div>
                                 </div>
