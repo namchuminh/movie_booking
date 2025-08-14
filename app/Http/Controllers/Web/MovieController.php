@@ -5,9 +5,31 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Cinema;
+use App\Models\Showtime;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
+    public function show($id)
+    {
+        $movie = Movie::findOrFail($id);
+
+        // Lấy các suất chiếu có mã phim bằng $id
+        $showtimes = Showtime::query()
+            ->where('movie_id', $id)
+            ->with('room.cinema')
+            ->orderBy('show_date')
+            ->orderBy('show_time')
+            ->get();
+
+        // Nhóm theo rạp (cinema)
+        $byCinema = $showtimes->groupBy(fn($st) => $st->room->cinema->id);
+
+        return view('web.movies.show', compact('movie', 'showtimes', 'byCinema'));
+    }
+
     public function nowShowing(Request $request)
     {
         $genre = $request->query('genre');

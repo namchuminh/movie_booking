@@ -115,7 +115,7 @@
                             <div class="d-flex">
                                 <img src="{{ asset($movie->image) }}" width="120" height="150" class="rounded me-3">
                                 <div>
-                                    <h6 class="mb-1"><a href="#" class="text-decoration-none fw-bold text-dark">{{ $movie->title }}</a></h6>
+                                    <h6 class="mb-1"><a href="{{ route('movies.show', $movie->id) }}" class="text-decoration-none fw-bold text-dark">{{ $movie->title }}</a></h6>
 
                                     <div class="text-muted mb-1" style="font-size: 13px;">
                                         {{ $movie->director ?? 'Đạo diễn ẩn danh' }} · {{ $movie->language }} ·

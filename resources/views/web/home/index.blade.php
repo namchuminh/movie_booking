@@ -10,15 +10,15 @@
                     <div class="col" style="max-width: 140px;">
                         <div class="bg-white border rounded shadow-sm">
                             <div class="position-relative">
-                                <a href="#" class="text-decoration-none border-none">
+                                <a href="{{ route('movies.show', $movie->id) }}" class="text-decoration-none border-none">
                                     <img src="{{ asset($movie->image) }}" class="rounded w-100" style="height: 185px;">
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('movies.show', $movie->id) }}"
                                     class="fw-bold position-absolute bottom-0 start-0 end-0 bg-danger text-white py-1 text-decoration-none text-center"
                                     style="font-size: 12px;">Mua vé</a>
                             </div>
                             <div class="title-movie text-dark mt-2 fw-bold px-2">
-                                <a href="#" class="text-decoration-none text-dark">{{ $movie->title }}</a>
+                                <a href="{{ route('movies.show', $movie->id) }}" class="text-decoration-none text-dark">{{ $movie->title }}</a>
                             </div>
                             <div class="text-muted fw-bold mb-2 px-2" style="font-size: 12px;">
                                 {{ \Carbon\Carbon::parse($movie->release_date)->format('d/m') }}
@@ -158,7 +158,7 @@
                             <div class="d-flex">
                                 <img src="{{ asset($movie->image) }}" width="120" height="150" class="rounded me-3">
                                 <div>
-                                    <h6 class="mb-1"><a href="#" class="text-decoration-none fw-bold text-dark">{{ $movie->title }}</a></h6>
+                                    <h6 class="mb-1"><a href="{{ route('movies.show', $movie->id) }}" class="text-decoration-none fw-bold text-dark">{{ $movie->title }}</a></h6>
 
                                     <div class="text-muted mb-1" style="font-size: 13px;">
                                         {{ $movie->director ?? 'Đạo diễn ẩn danh' }} · {{ $movie->language }} ·

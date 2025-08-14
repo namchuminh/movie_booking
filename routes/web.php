@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [\App\Http\Controllers\Web\HomeController::class, 'index'])->name('home');
+Route::get('/phim/{id}', [\App\Http\Controllers\Web\MovieController::class, 'show'])
+    ->name('movies.show');
 Route::get('/phim-dang-chieu', [\App\Http\Controllers\Web\MovieController::class, 'nowShowing'])
     ->name('movies.now_showing');
 Route::get('/phim-sap-chieu', [\App\Http\Controllers\Web\MovieController::class, 'comingSoon'])

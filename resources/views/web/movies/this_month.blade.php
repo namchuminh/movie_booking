@@ -128,7 +128,7 @@
                 <div class="row">
                     @forelse ($movies as $movie)
                         <div class="col-6 col-sm-4 col-md-3 col-xxl-1-5 mb-4">
-                            <div class="movie-card shadow-sm">
+                            <a href="{{ route('movies.show', $movie->id) }}" class="movie-card shadow-sm text-dark">
                                 <!-- Poster -->
                                 <div class="poster-wrapper position-relative">
                                     <img src="{{ $movie->image }}" class="w-100 h-100" alt="{{ $movie->title }}">
@@ -150,7 +150,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @empty
                         <div class="text-center text-muted py-5">Không có phim phù hợp.</div>
