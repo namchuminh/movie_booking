@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\RateLimiter;
 use App\Models\User;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -184,6 +185,25 @@ class UserController extends Controller
         auth()->login($user);
 
         return redirect()->route('home')->with('status', 'Tạo tài khoản thành công!');
+    }
+
+    public function tickets(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('home');
+        }
+
+        $user = Auth::user();
+
+        $query = Ticket::with(['showtime.movie', 'seat.room.cinema', 'user']);
+
+        $query->whereHas('user', function ($q) use ($request) {
+            $q->where('username', 'like', '%' . Auth::user()->username . '%');
+        });
+
+        $tickets = $query->latest()->paginate(15)->appends($request->all());
+
+        return view('web.user.tickets', compact('tickets', 'user'));
     }
 
 }

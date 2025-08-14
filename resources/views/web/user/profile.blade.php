@@ -29,7 +29,7 @@
                 <a class="nav-link active" href="{{ route('user') }}">Tài khoản</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Vé Đã Đặt</a>
+                <a class="nav-link" href="{{ route('profile.tickets') }}">Vé Đã Đặt</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}">Đăng Xuất</a>
@@ -44,7 +44,7 @@
                 @endif
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <form action="{{ route('profile') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+                        <form action="{{ route('profile') }}" method="POST" enctype="multipart/form-data" class="row g-3 profile-form">
                             @csrf
                             @method('PUT')
 
@@ -149,6 +149,10 @@
             opacity: 1;
             color: #6b7280;
             cursor: not-allowed;
+        }
+        .profile-form input:focus {
+            box-shadow: none;
+            border-color: #dee2e6;
         }
     </style>
 

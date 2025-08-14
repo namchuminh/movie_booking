@@ -36,6 +36,7 @@ Route::get('/in-ve/{id}', [\App\Http\Controllers\Web\TicketController::class, 'p
 Route::post('/dang-nhap', [\App\Http\Controllers\Web\UserController::class, 'login'])->name('login');
 Route::get('/khach-hang', [\App\Http\Controllers\Web\UserController::class, 'user'])->name('user');  
 Route::put('/khach-hang', [\App\Http\Controllers\Web\UserController::class, 'update'])->name('profile');
+Route::get('/khach-hang/ve-da-dat', [\App\Http\Controllers\Web\UserController::class, 'tickets'])->name('profile.tickets');
 Route::get('/dang-xuat', [\App\Http\Controllers\Web\UserController::class, 'logout'])->name('logout');
 
 Route::get('/dang-ky', [\App\Http\Controllers\Web\UserController::class, 'register'])->name('register');
