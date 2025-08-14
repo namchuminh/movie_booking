@@ -179,7 +179,7 @@
                                             @php
                                                 $seatPrices = $showtime->room->seats->pluck('price');
                                                 $seatPrice = $seatPrices->min() ?? 0;
-                                                $finalPrice = $showtime->price + $seatPrice;
+                                                $finalPrice = $showtime->price;
                                             @endphp
 
                                             <a href="{{ route('tickets.show', $showtime->id) }}" class="btn btn-sm" style="border-color: black; font-size: 11px;">
