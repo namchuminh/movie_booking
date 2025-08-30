@@ -92,4 +92,23 @@ class MovieController extends Controller
 
         return view('web.movies.this_month', compact('movies'));
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $genre = $request->query('genre');
+        $language = $request->query('language');
+        $sort = $request->query('sort'); // 'newest' hoặc 'oldest'
+        
+
+        $movies = Movie::query()
+            ->where('title', 'like', "%{$query}%")
+            ->when($genre, fn($q) => $q->where('genre', $genre))
+            ->when($language, fn($q) => $q->where('language', $language))
+            ->when($sort === 'oldest', fn($q) => $q->orderBy('release_date'))
+            ->when($sort === 'newest' || !$sort, fn($q) => $q->orderByDesc('release_date'))
+            ->paginate(15);
+
+        return view('web.movies.search', compact('movies', 'query', 'genre', 'language', 'sort'));
+    }
 }

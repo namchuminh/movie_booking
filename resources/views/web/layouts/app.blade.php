@@ -85,11 +85,11 @@
 
                 <!-- Right tools -->
                 <div class="d-flex align-items-center gap-3 ms-auto">
-                    <form class="d-none d-lg-block" style="width: 220px;">
+                    <form class="d-none d-lg-block" style="width: 220px;" action="{{ route('search') }}" method="GET">
                         <div class="input-group input-group-sm">
                             <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
                             <input class="form-control border-start-0 search-common" type="search"
-                                placeholder="Tìm phim, rạp...">
+                                placeholder="Tìm phim cần mua vé..." name="query">
                         </div>
                     </form>
 

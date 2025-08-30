@@ -44,6 +44,8 @@ Route::get('/dang-xuat', [\App\Http\Controllers\Web\UserController::class, 'logo
 Route::get('/dang-ky', [\App\Http\Controllers\Web\UserController::class, 'register'])->name('register');
 Route::post('/dang-ky', [\App\Http\Controllers\Web\UserController::class, 'registerSubmit'])->name('registerSubmit');
 
+Route::get('/tim-kiem-phim', [\App\Http\Controllers\Web\MovieController::class, 'search'])->name('search');
+
 
 
 Route::get('/admin/login', [\App\Http\Controllers\Admin\AuthController::class, 'loginForm'])->name('admin.loginForm');
