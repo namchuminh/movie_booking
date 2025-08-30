@@ -98,7 +98,7 @@
                         <a href="{{ route('movies.show', $movie->id) }}" class="movie-card shadow-sm text-dark">
                             <div class="poster-wrapper position-relative">
                                 <img src="{{ $movie->image }}" class="w-100 h-100" alt="{{ $movie->title }}">
-                                <span class="badge-custom bg-danger text-white fw-semibold">{{ $movie->genre }}</span>
+                                <span class="badge-custom bg-danger text-white fw-semibold">{{ $movie->age }}+</span>
                             </div>
                             <div class="p-2">
                                 <div class="fw-semibold small text-truncate" title="{{ $movie->title }}">

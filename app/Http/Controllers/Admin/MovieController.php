@@ -51,6 +51,7 @@ class MovieController extends Controller
             'director'      => 'nullable|string|max:100',
             'description'   => 'nullable|string',
             'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'age'          => 'nullable|integer|min:0',
         ], [
             'title.required'        => 'Vui lòng nhập tên phim.',
             'genre.required'        => 'Vui lòng chọn thể loại.',
@@ -59,12 +60,14 @@ class MovieController extends Controller
             'release_date.required' => 'Vui lòng nhập ngày khởi chiếu.',
             'image.image'           => 'Tệp phải là hình ảnh.',
             'image.mimes'           => 'Ảnh chỉ chấp nhận jpeg, png, jpg, gif.',
-            'image.max'             => 'Kích thước ảnh không quá 2MB.'
+            'image.max'             => 'Kích thước ảnh không quá 2MB.',
+            'age.integer'           => 'Độ tuổi phải là số.',
+            'age.min'               => 'Độ tuổi phải là số dương.'
         ]);
 
         $data = $request->only([
             'title', 'genre', 'duration', 'release_date', 'language',
-            'rating', 'trailer_url', 'actors', 'director', 'description'
+            'rating', 'trailer_url', 'actors', 'director', 'description', 'age'
         ]);
 
         if ($request->hasFile('image')) {
@@ -102,6 +105,7 @@ class MovieController extends Controller
             'director'      => 'nullable|string|max:100',
             'description'   => 'nullable|string',
             'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'age'           => 'nullable|integer|min:0',
         ], [
             'title.required'        => 'Vui lòng nhập tên phim.',
             'genre.required'        => 'Vui lòng chọn thể loại.',
@@ -110,14 +114,16 @@ class MovieController extends Controller
             'release_date.required' => 'Vui lòng nhập ngày khởi chiếu.',
             'image.image'           => 'Tệp phải là hình ảnh.',
             'image.mimes'           => 'Ảnh chỉ chấp nhận jpeg, png, jpg, gif.',
-            'image.max'             => 'Kích thước ảnh không quá 2MB.'
+            'image.max'             => 'Kích thước ảnh không quá 2MB.',
+            'age.integer'           => 'Độ tuổi phải là số.',
+            'age.min'               => 'Độ tuổi phải là số dương.'
         ]);
 
         $movie = Movie::findOrFail($id);
 
         $data = $request->only([
             'title', 'genre', 'duration', 'release_date', 'language',
-            'rating', 'trailer_url', 'actors', 'director', 'description'
+            'rating', 'trailer_url', 'actors', 'director', 'description', 'age'
         ]);
 
         if ($request->hasFile('image')) {

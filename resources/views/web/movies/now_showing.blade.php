@@ -134,7 +134,7 @@
                                 <div class="poster-wrapper position-relative">
                                     <img src="{{ $movie->image }}" class="w-100 h-100" alt="{{ $movie->title }}">
 
-                                    <span class="badge-custom bg-danger text-white fw-semibold">{{ $movie->genre }}</span>
+                                    <span class="badge-custom bg-danger text-white fw-semibold">{{ $movie->age }}+</span>
                                 </div>
 
                                 <!-- Info -->

@@ -57,6 +57,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Độ Tuổi</label>
+                            <input type="number" name="age" class="form-control" value="{{ old('age', $movie->age) }}" placeholder="0">
+                            @error('age') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label>Ngày Khởi Chiếu</label>
                             <input type="date" name="release_date" class="form-control" value="{{ old('release_date', $movie->release_date) }}">
                             @error('release_date') <span class="text-danger">{{ $message }}</span> @enderror
